@@ -1,0 +1,25 @@
+#header {
+    height: 1;
+    margin-bottom: 2;
+}
+#header Button {
+    height: 1;
+    border: none;
+}
+#content {
+    margin-left: 2;
+    margin-right: 2;
+}
+#server_info Row {
+    height: 2;
+}
+
+#server-info-header {
+    background: grey;
+}
+
+#error {
+    height: 2;
+    margin-left: 2;
+    margin-right: 2;
+}

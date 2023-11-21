@@ -1,0 +1,16 @@
+URI = "meta://debug/flag"
+WIDTH = 30
+HEIGHT = 30
+
+function init()
+    return {}
+end
+
+function render()
+  -- Open "/flag" and read contents
+
+  local f = io.open("flag", "r")
+  local flag = f:read("*all")
+
+  return Draw_draw(flag)
+end

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Competition Result | Tick {{ tick }}</title>
+</head>
+<body>
+    <h2>Competition Result @ Tick {{ tick }}</h2>
+    <h3>Rank</h3>
+    {% for r in ranks %}
+    <p>{{ r.rank }} - {{ r.team_name }} with {{ r.score }} points</p>
+    {% endfor %}
+    <h3>Matrix</h3>
+    <table>
+        <tr>
+            <td>Attack / Defense</td>
+            {% for team_name in team_names %}
+            <td>{{ team_name }}</td>
+            {% endfor %}
+        </tr>
+        {% for row in rows %}
+            <tr>
+            {% for cell in row %}
+                {% if cell == '-' %}
+                    <td>{{ cell }}</td>
+                {% elif cell.link == "" %}
+                    <td>{{ cell.content }}</td>
+                {% else %}
+                    <td><a href="{{ cell.link }}">{{ cell.content }}</a></td>
+                {% endif %}
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

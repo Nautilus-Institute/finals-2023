@@ -1,0 +1,88 @@
+<html lang="en">
+    <head>
+        <title>safebox</title>
+    </head>
+
+    <body>
+    {% if team_id is None %}
+        <form action="/login" method="POST">
+            {% csrf_token %}
+            <label for="team_name">Team name:</label>
+            <input type="text" name="team_name" id="team_name" />
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" />
+            <input type="submit" value="Submit" />
+        </form>
+    {% else %}
+        <h2>Team {{ team_name }} | (#{{ team_id }})</h2>
+
+        <h3>Game Goals</h3>
+        <div>
+        <p>As an attacker: leak the secret string in the safebox!</p>
+        <p>As a defender: stop others from leaking the secret string in the safebox!</p>
+        <h3>Game Rules</h3>
+        <ul>
+            <li>Each team submits an attack prompt and a defense prompt.</li>
+            <li>We take the latest submissions from all teams at the end of each round and send them to a large language model (LLM).</li>
+            <li>A team get one points every time it successfully gets the LLM to spit out the secret string.</li>
+            <li>Each game tick (5 minutes currently) has a unique secret string.</li>
+            <li>Good luck!</li>
+        </ul>
+            <ul></ul>
+        <p></p>
+        <p><b>Current game setting:</b></p>
+        <ul>
+            <li>Defense prompt goes first.</li>
+            <li>Prompts of all teams are released immediately.</li>
+            <li>Filter regex <pre>[0-9A-Za-z\s,.=-&quot;&lsquo;]+</pre> <span>has been applied to all prompts starting at 11:30 AM on Sunday</span>.</li>
+            <li style="color: red; font-weight: bold;">A block list of words has been applied at 12:30 PM on Sunday. It is the last change to safebox before the game ends.</li>
+        </ul>
+        </div>
+        <div>
+        <h3>Current word block list</h3>
+            "format", "json", "xml", "html", "encoding", "secret", "language", "english", "japanese", "chinese", "korean", "python", "perl", "java", "translat", "repeat",
+        </div>
+        <div>
+        <p>
+        <b>Current attack prompt:</b>
+        {{ attack_prompt }}
+        </p>
+        <p>Submitted at {{ attack_prompt_time }}</p>
+        </div>
+        <div>
+        <p>
+        <b>Current defense prompt:</b>
+        {{ defense_prompt }}
+        </p>
+        <p>Submitted at {{ defense_prompt_time }}</p>
+        </div>
+        <!-- Submit a prompt -->
+        <h3>Submit a new prompt</h3>
+        <form action="/submit_prompt" method="POST">
+            {% csrf_token %}
+            <label for="type">Prompt Type:</label>
+            <select name="type" id="type">
+                <option value="attack">Attack</option>
+                <option value="defense">Defense</option>
+            </select>
+            <br />
+            <label for="prompt">Prompt:</label>
+            <textarea name="prompt" id="prompt" rows="4" cols="80"></textarea>
+            <br />
+            (At most 256 characters)
+            <br />
+            <button type="submit">Submit</button>
+        </form>
+        <h3>View past results</h3>
+        <ul>
+        {% for tick_id, progress in ticks_with_progress %}
+            {% if progress == 100.0 %}
+            <li><a href="/get_tick_result?tick_id={{ tick_id }}">Tick {{ tick_id }}</a></li>
+            {% else %}
+            <li>Tick {{ tick_id }} - progress {{ progress }}%</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="row">
+    {% for house in inventory %}
+        {% if house.pic_path %}
+        <div class="card warning">
+        {% else %}
+        <div class="card large">
+        {% endif %}
+        <p>
+        Address: {{ house.address }}
+        </p>
+        <p>
+        Bedrooms: {{ house.bedrooms }}
+        </p>
+        <p>
+        Bathrooms: {{ house.bathrooms }}
+        </p>
+        {% if house.pic_path %}
+            <img src="{{ house.pic_path | safe }}" width="100px" height="100px">
+        {% endif %}
+        <p>
+        <a href="/remove_house?method=delete&id={{ house.id }}">Delete</a>
+        </p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

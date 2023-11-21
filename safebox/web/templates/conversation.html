@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversation</title>
+</head>
+<body>
+    <h2>Conversation</h2>
+    <p>
+    <b>Opening text</b>: {{ leading_text }}
+    </p>
+    <p>
+    <b>Defender {{ defense_team }}</b>: {{ defense_text }}
+    </p>
+    <p>
+    <b>Attacker {{ attack_team }}</b>: {{ attack_text }}
+    </p>
+    <p>
+    <b>Answer</b>: {{ answer }}
+    </p>
+    <i>{% if result == 1 %}
+    Attacker wins
+    {% else %}
+    Defender wins
+    {% endif %}</i>
+</body>
+</html>

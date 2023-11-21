@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body %}
+    <div>
+        <form method="post" action="/register">
+            <fieldset>
+                <legend>Register a new agent</legend>
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                    <label for="username">User name:</label>
+                    <input type="text" name="username" id="username" />
+                    </div>
+                    <div class="col-sm-12 col-md-8">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password"><p>Suggested password: {{ suggested_password }}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-8">
+                        <label for="repeat_password">Repeat password:</label>
+                        <input type="password" name="repeat_password" id="repeat_password">
+                    </div>
+                    <div class="col-sm-12 col-md-8">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <div class="col-sm-12 col-md-8">
+                        <label for="realname">Real name:</label>
+                        <input type="text" name="realname" id="realname">
+                    </div>
+                </div>
+                <input type="submit" value="Register" class="primary">
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

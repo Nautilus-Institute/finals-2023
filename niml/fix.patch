@@ -1,0 +1,12 @@
+diff --git a/include/throwable.h b/include/throwable.h
+index 8b9adaf..aa3a110 100644
+--- a/include/throwable.h
++++ b/include/throwable.h
+@@ -11,6 +11,7 @@
+  */
+ #include <exception>
+ #include <string>
++#include <stdexcept>
+ 
+ /**
+  *  Forward declarations

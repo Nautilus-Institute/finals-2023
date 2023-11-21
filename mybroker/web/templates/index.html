@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block body %}
+    {% if username %}
+    Welcome, {{ username }}
+        {% if is_admin %}
+            (admin)
+        {% else %}
+            (user)
+        {% endif %}
+!
+        <a href="/logout">Log out</a>
+    {% else %}
+    Please log in first.
+    <a href="/register">Register</a>
+
+    <div>
+    <form action="/login" method="post">
+        <fieldset>
+            <legend>Login</legend>
+            <label for="username">User name</label>
+            <input type="text" id="username" name="username">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <input type="submit" value="Submit" class="primary">
+        </fieldset>
+    </form>
+    </div>
+    {% endif %}
+    <div>
+        <h3>Tasks</h3>
+        <div class="row">
+            <a href="/inventory">View house inventory</a>
+        </div>
+        <div class="row">
+            <a href="/add_house">Add a new house</a>
+        </div>
+        <h3>Active Users</h3>
+        <ul>
+        {% for user in active_users %}
+            <li>{{ user }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

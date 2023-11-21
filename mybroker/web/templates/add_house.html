@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <form method="post" action="/add_house" enctype="multipart/form-data">
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address"><br>
+
+        <label for="bedrooms">Number of Bedrooms:</label><br>
+        <input type="number" id="bedrooms" name="bedrooms" min="0"><br>
+
+        <label for="bathrooms">Number of Bathrooms:</label><br>
+        <input type="number" id="bathrooms" name="bathrooms" min="0"><br>
+
+        <label for="price">Price:</label><br>
+        <input type="number" id="price" name="price" min="0"><br>
+
+        <label for="pic">House profile picture (optional):</label>
+        <input type="file" name="pic">
+
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
